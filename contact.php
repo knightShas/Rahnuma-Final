@@ -81,7 +81,7 @@
 			
 		</div>
 	</div>
-	<div id="map" class="fh5co-map"></div>
+	<!-- <div id="map" class="fh5co-map"></div> -->
 
 	<div id="fh5co-register" style="background-image: url(images/img_bg_2.jpg);">
 		<div class="overlay"></div>
