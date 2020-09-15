@@ -55,7 +55,7 @@ $result = mysqli_query($conn,"SELECT * FROM blog ORDER BY id ASC LIMIT $start_fr
                 <a class="nav-link"  href="addblog.php">Add Blog</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+                <a class="nav-link" href="signup.php">Add Profile</a>
             </li>
         </ul>
         <div class="container">
@@ -78,8 +78,8 @@ $result = mysqli_query($conn,"SELECT * FROM blog ORDER BY id ASC LIMIT $start_fr
                     <td><?php echo $row['blog_title']; ?></td>
                     <td><?php echo $row['srt_dec']; ?></td>
                     <td><?php echo $row['blog']; ?></td>
-                    <td><a class="btn btn-warning" href="editblog.php?id=<?php echo $row['id'];?>" role="button">Edit</a></td>
-                    <td><a class="btn btn-danger" href="delete.php?id=<?php echo $row['id'];?>" role="button">Delete</a></td>
+                    <td><a class="btn btn-warning" href="editblog.php?id=<?php echo base64_encode($row['id']);?>" role="button">Edit</a></td>
+                    <td><a class="btn btn-danger" href="delete.php?id=<?php echo base64_encode($row['id']);?>" role="button">Delete</a></td>
                     </tr>
 
                     <?php

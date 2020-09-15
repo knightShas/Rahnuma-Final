@@ -14,17 +14,24 @@
         $id = $row['id'];
         if($_SERVER["REQUEST_METHOD"] == "POST"){
 
+            $filename = $_FILES["xyz"]["name"]; 
+            $tempname = $_FILES["xyz"]["tmp_name"];     
+            $folder = "imageupload/".$filename; 
+
+
             $blog_title = $_POST['blog_title'];
             $srt_dec = $_POST['blog_title'];
             $blog = $_POST['blog'];
             $date = date('Y-m-d H:i:s');
-            $sql = "INSERT INTO `blog` (`admin_id`, `blog_title`, `srt_dec`, `blog`, `date`) VALUES ( '$id', '$blog_title', '$srt_dec', '$blog', '$date')";
-            $result = mysqli_query($conn, $sql);
-            if ($result == 1){
-                header("location:dashboard.php");
-            }
-            else{
-                echo "error";
+            if (move_uploaded_file($tempname, $folder))  {
+                $sql = "INSERT INTO `blog` (`admin_id`, `img_file`, `blog_title`, `srt_dec`, `blog`, `date`) VALUES ( '$id', '$filename', '$blog_title', '$srt_dec', '$blog', '$date')";
+                $result = mysqli_query($conn, $sql);
+                if ($result == 1){
+                    header("location:dashboard.php");
+                }
+                else{
+                    echo "error";
+                }
             }
         }
     }
@@ -65,14 +72,15 @@
                 <a class="nav-link active" href="addblog.php">Add Blog</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+                <a class="nav-link" href="signup.php">Add Profile</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-            </li>
+            
         </ul>
-        <div class="container">
-            <form action="addblog.php" method="POST">
+        <div class="container" style="padding-top: 12px;">
+                <form action="addblog.php" method="POST" enctype="multipart/form-data"> 
+                <div class="form-group">
+                <input type="file" name="xyz" value="" />
+                </div>
                 <div class="form-group">
                     <label for="blog_title">Blog Title</label>
                     <input type="text" class="form-control" id="blog_title" name="blog_title">
@@ -83,13 +91,13 @@
                 </div>
                 <div class="form-group">
                     <label for="blog">Article</label>
-                    <textarea class="form-control" id="blog" rows="12" name="blog"></textarea>
+                    <textarea class="form-control" id="blog" rows="12" col="80" name="blog" id="editor"></textarea>
                 </div>
                 <button class="btn btn-lg btn-danger btn-block" type="submit">Submit</button>
             </form>
         </div>
         
-     
+    
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

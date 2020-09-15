@@ -7,27 +7,10 @@
     }
     else{
         include 'partial/_dbconnect.php';
-        $bid = $_GET['id']; 
-
+        $bid = base64_decode($_GET['id']); 
+        // echo $bid;exit;
         $sql = "select * from blog where id='$bid'";
         $result = mysqli_query($conn, $sql);
-
-        if($_SERVER["REQUEST_METHOD"] == "POST"){
-
-            $blog_title = $_POST['blog_title'];
-            $srt_dec = $_POST['blog_title'];
-            $blog = $_POST['blog'];
-            $date = date('Y-m-d H:i:s');
-            $sql = "UPDATE `blog` SET `blog_title`='$blog_title',`srt_dec`='$srt_dec',`blog`='$blog',`date`='$date' WHERE id = '$bid'";
-            $result = mysqli_query($conn, $sql);
-            if ($result == 1){
-                echo 'done';
-                header("location:dashboard.php");
-            }
-            else{
-                echo "error";
-            }
-        }
     }
 
     
@@ -45,7 +28,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
-    <title>Dashboard</title>
+    <title>Edit-Blog</title>
   </head>
   <body>
         <!-- As a link -->
@@ -65,18 +48,19 @@
                 <a class="nav-link" href="dashboard.php">Dashboard</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="addblog.php">Add Blog</a>
+                <a class="nav-link" href="addblog.php">Add Blog</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+                <a class="nav-link" href="signup.php">Add Profile</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-            </li>
+            
         </ul>
         <div class="container">
-            <form action="addblog.php" method="POST">
+            <form action="editfunc.php?id=<?php echo base64_encode($bid);?>" method="POST" enctype="multipart/form-data">
             <?php while($row = mysqli_fetch_array($result)) { ?>
+                <div class="form-group">
+                <input type="file" name="xyz" value="<?php echo $row['img_file'];?>" />
+                </div>
                 <div class="form-group">
                     <label for="blog_title">Blog Title</label>
                     <input type="text" class="form-control" id="blog_title" name="blog_title" value="<?php echo $row['blog_title'];?>">
@@ -89,7 +73,7 @@
                     <label for="blog">Article</label>
                     <textarea class="form-control" id="blog" rows="12" name="blog"><?php echo $row['blog'];?></textarea>
                 </div>
-                <button class="btn btn-lg btn-danger btn-block" type="submit">Submit</button>
+                <button class="btn btn-lg btn-danger btn-block" type="submit" name="submit">Submit</button>
             <?php }; ?>
             </form>
         </div>
