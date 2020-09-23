@@ -38,13 +38,11 @@
                      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                         <div class="our_text_box">
                            <br>
-                           <h3 class="awesome pa_wi"><?php echo $row['blog_title']; ?></h3>
+                           <h3 class="awesome pa_wi"><?php echo str_replace("\'","'",$row['blog_title']); ?></h3>
                            <p> 
-                              <?php echo $row['srt_dec']; ?>
-                           </p><span id="dots">...</span>
-                           <!-- <span id="more"> -->
+                              <?php echo str_replace("\'","'",$row['srt_dec']); ?>
                            <p>
-                              <?php echo $row['blog'];?>
+                              <?php echo str_replace("\'","'",$row['blog']);?>
                            </p>
                            <!-- </span> <button style="margin-bottom:10px" class="btn btn-primary" onclick="myFunction()"
                               id="myBtn">Read more</button> -->

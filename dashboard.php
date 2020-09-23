@@ -75,9 +75,9 @@ $result = mysqli_query($conn,"SELECT * FROM blog ORDER BY id ASC LIMIT $start_fr
                     {?>
                     <tr>
                     <td><?php echo $row['id']; ?></td>
-                    <td><?php echo $row['blog_title']; ?></td>
-                    <td><?php echo $row['srt_dec']; ?></td>
-                    <td><?php echo $row['blog']; ?></td>
+                    <td><?php echo str_replace("\'","'",$row['blog_title']); ?></td>
+                    <td><?php echo str_replace("\'","'",$row['srt_dec']); ?></td>
+                    <td><?php echo str_replace("\'","'",$row['blog']); ?></td>
                     <td><a class="btn btn-warning" href="editblog.php?id=<?php echo base64_encode($row['id']);?>" role="button">Edit</a></td>
                     <td><a class="btn btn-danger" href="delete.php?id=<?php echo base64_encode($row['id']);?>" role="button">Delete</a></td>
                     </tr>

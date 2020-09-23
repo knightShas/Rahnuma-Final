@@ -29,6 +29,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
     <title>Edit-Blog</title>
+    <script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
+    <script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
+	
   </head>
   <body>
         <!-- As a link -->
@@ -63,15 +66,15 @@
                 </div>
                 <div class="form-group">
                     <label for="blog_title">Blog Title</label>
-                    <input type="text" class="form-control" id="blog_title" name="blog_title" value="<?php echo $row['blog_title'];?>">
+                    <input type="text" class="form-control" id="blog_title" name="blog_title" value="<?php echo str_replace("\'","'",$row['blog_title']);?>">
                 </div>
                 <div class="form-group">
                     <label for="srt_des">Short Description</label>
-                    <input type="text" class="form-control" id="srt_des" name="srt_des" value="<?php echo $row['srt_dec'];?>">
+                    <input type="text" class="form-control" id="srt_des" name="srt_des" value="<?php echo str_replace("\'","'",$row['srt_dec']);?>">
                 </div>
                 <div class="form-group">
                     <label for="blog">Article</label>
-                    <textarea class="form-control" id="blog" rows="12" name="blog"><?php echo $row['blog'];?></textarea>
+                    <textarea class="form-control" id="blog" rows="12" name="blog"><?php echo str_replace("\'","'",$row['blog']);?></textarea>
                 </div>
                 <button class="btn btn-lg btn-danger btn-block" type="submit" name="submit">Submit</button>
             <?php }; ?>

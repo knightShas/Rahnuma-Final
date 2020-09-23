@@ -15,13 +15,16 @@
             $folder = "imageupload/".$filename; 
 
             $blog_title = $_POST['blog_title'];
+            $blog_title = str_replace("'","\'",$blog_title);
             $srt_dec = $_POST['blog_title'];
+            $srt_dec = str_replace("'","\'",$srt_dec);
             $blog = $_POST['blog'];
+            $blog = str_replace("'","\'",$blog);
             $date = date('Y-m-d H:i:s');
 
             $sql = "UPDATE `blog` SET `img_file`='$filename', `blog_title`='$blog_title', `srt_dec`='$srt_dec', `blog`='$blog', `date`='$date' WHERE `id` = '$bid'";
             $result = mysqli_query($conn, $sql);
-            echo $result; exit;
+            
             if ($result == 1){
                 echo 'done';
                 header("location:dashboard.php");

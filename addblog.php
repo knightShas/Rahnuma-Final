@@ -20,8 +20,11 @@
 
 
             $blog_title = $_POST['blog_title'];
+            $blog_title = str_replace("'","\'",$blog_title);
             $srt_dec = $_POST['blog_title'];
+            $srt_dec = str_replace("'","\'",$srt_dec);
             $blog = $_POST['blog'];
+            $blog = str_replace("'","\'",$blog);
             $date = date('Y-m-d H:i:s');
             if (move_uploaded_file($tempname, $folder))  {
                 $sql = "INSERT INTO `blog` (`admin_id`, `img_file`, `blog_title`, `srt_dec`, `blog`, `date`) VALUES ( '$id', '$filename', '$blog_title', '$srt_dec', '$blog', '$date')";
@@ -49,7 +52,10 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
-    <title>Dashboard</title>
+    <title>Add Blog</title>
+    <script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
+    <script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
+	
   </head>
   <body>
         <!-- As a link -->
